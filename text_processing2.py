@@ -28,7 +28,19 @@ def digits_to_words(input_string):
             >>> tp2.digits_to_words(digits_str2)
             'three one four one five'
     """
-    digit_string = None
+    name = {
+        0: 'zero',
+        1: 'one',
+        2: 'two',
+        3: 'three',
+        4: 'four',
+        5: 'five',
+        6: 'six',
+        7: 'seven',
+        8: 'eight',
+        9: 'nine',
+    }
+    digit_string = ' '.join(list(map(lambda c: name[int(c)], list(filter(lambda c: c.isdigit(), input_string)))))
     return digit_string
 
 
@@ -64,5 +76,24 @@ def to_camel_case(underscore_str):
             >>> tp2.to_camel_case(underscore_str3)
             "alreadyCamel"
     """
-    camelcase_str = None
+    camelcase_str = underscore_str if len(underscore_str.split('_')) == 1 else ''.join(list(map(lambda x: x[1].title() if x[0] != 0 else x[1].lower(), enumerate(filter(lambda w: w, underscore_str.split('_'))))))
     return camelcase_str
+
+
+##########
+# Debug  #
+##########
+
+def debug():
+    ex = "Zip Code: 19104"
+    assert "one nine one zero four" == digits_to_words(ex)
+
+    ex = "__EXAMPLE__NAME__"
+    assert "exampleName" == to_camel_case(ex)
+
+    ex = "alreadyCamel"
+    assert "alreadyCamel" == to_camel_case(ex)
+
+
+if __name__ == "__main__":
+    debug()
